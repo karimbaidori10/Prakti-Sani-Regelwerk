@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LSMD Wiki Regelwerk</title>
+
+<style>
+body{
+margin:0;
+font-family:Arial;
+background:#0b1220;
+color:white;
+display:flex;
+}
+
+/* SIDEBAR */
+.sidebar{
+width:220px;
+background:#111827;
+height:100vh;
+padding:15px;
+position:fixed;
+overflow:auto;
+}
+
+.sidebar h2{
+font-size:16px;
+margin-bottom:10px;
+}
+
+.nav{
+padding:8px;
+cursor:pointer;
+border-radius:6px;
+font-size:13px;
+}
+
+.nav:hover{
+background:#1f2937;
+}
+
+/* MAIN */
+.main{
+margin-left:220px;
+padding:20px;
+width:100%;
+}
+
+header{
+padding:15px;
+background:#111827;
+border-radius:10px;
+margin-bottom:15px;
+}
+
+.category{
+margin-bottom:15px;
+background:#111827;
+border-radius:10px;
+overflow:hidden;
+}
+
+.cat-title{
+padding:12px;
+background:#1f2937;
+cursor:pointer;
+font-weight:bold;
+}
+
+.rules{
+display:none;
+padding:10px;
+}
+
+.rule{
+background:#0b1220;
+padding:10px;
+margin-bottom:8px;
+border-radius:8px;
+border-left:3px solid #38bdf8;
+cursor:pointer;
+font-size:13px;
+transition:0.2s;
+}
+
+.rule.done{
+text-decoration: line-through;
+opacity:0.5;
+}
+
+button{
+padding:10px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+margin-top:10px;
+}
+
+.save{background:#22c55e;color:white;}
+.add{background:#3b82f6;color:white;}
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+<h2>📘 LSMD Wiki</h2>
+
+<div class="nav" onclick="scrollToCat(0)">🛡 Allgemein</div>
+<div class="nav" onclick="scrollToCat(1)">🔄 Kommunikation</div>
+<div class="nav" onclick="scrollToCat(2)">📋 Prüfungen</div>
+<div class="nav" onclick="scrollToCat(3)">🗂 Dokumentation</div>
+<div class="nav" onclick="scrollToCat(4)">💬 Motivation</div>
+<div class="nav" onclick="scrollToCat(5)">🧭 Struktur</div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+<header>
+<h1>📘 LSMD Regelwerk Wiki</h1>
+<p>Klick = durchstreichen | Kategorie aufklappbar | Firebase Save</p>
+</header>
+
+<div id="content"></div>
+
+<button class="add" onclick="addRule()">+ Regel hinzufügen</button>
+<button class="save" onclick="save()">💾 Speichern</button>
+
+</div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
+import { getFirestore, collection, getDocs, addDoc, setDoc, doc } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "DEIN_KEY",
+  authDomain: "lsmd-prakti-sani.firebaseapp.com",
+  projectId: "lsmd-prakti-sani",
+  storageBucket: "lsmd-prakti-sani.firebasestorage.app",
+  messagingSenderId: "775818506431",
+  appId: "DEINE_APP_ID"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+/* KATEGORIEN */
+const categories = [
+{
+name:"🛡 Allgemeine Regeln",
+rules:[
+"§1 Vorbildfunktion",
+"§2 Fachliche Kompetenz",
+"§3 Teamarbeit",
+"§4 Mindestaktivität",
+"§5 Dienstkleidung"
+]
+},
+{
+name:"🔄 Kommunikation",
+rules:[
+"§8 Absprache Pflicht"
+]
+},
+{
+name:"📋 Prüfungen",
+rules:[
+"§9 Durchführung",
+"§10 Ausbilderverteilung",
+"§11 Zeitangaben"
+]
+},
+{
+name:"🗂 Dokumentation",
+rules:[
+"§15 Dokumente intern"
+]
+},
+{
+name:"💬 Motivation",
+rules:[
+"§16 Engagement fördern",
+"§17 Mitglieder ansprechen"
+]
+},
+{
+name:"🧭 Struktur",
+rules:[
+"§18 Patenzuweisung",
+"§19 Disziplin"
+]
+}
+];
+
+let data = [];
+
+/* LOAD */
+async function load(){
+
+const snap = await getDocs(collection(db,"rules"));
+
+if(snap.empty){
+for(let c of categories){
+for(let r of c.rules){
+await addDoc(collection(db,"rules"),{
+text:r,
+done:false,
+cat:c.name
+});
+}
+}
+load();
+return;
+}
+
+data = [];
+
+snap.forEach(d=>{
+data.push({id:d.id,...d.data()});
+});
+
+render();
+}
+
+/* RENDER */
+function render(){
+
+let html = "";
+
+categories.forEach((c,i)=>{
+
+html += `
+<div class="category">
+<div class="cat-title" onclick="toggleCat(${i})">${c.name}</div>
+<div class="rules" id="cat-${i}">
+`;
+
+data.filter(r=>r.cat===c.name).forEach((r,ri)=>{
+html += `
+<div class="rule ${r.done?'done':''}" onclick="toggle('${r.id}')">
+${r.text}
+</div>
+`;
+});
+
+html += `
+</div>
+</div>
+`;
+
+});
+
+document.getElementById("content").innerHTML = html;
+}
+
+/* CATEGORY TOGGLE */
+window.toggleCat = function(i){
+let el = document.getElementById("cat-"+i);
+el.style.display = el.style.display==="block"?"none":"block";
+}
+
+/* TOGGLE RULE */
+window.toggle = function(id){
+let r = data.find(x=>x.id===id);
+r.done = !r.done;
+render();
+}
+
+/* ADD RULE */
+window.addRule = function(){
+data.push({
+text:"Neue Regel",
+done:false,
+cat:"🛡 Allgemeine Regeln"
+});
+render();
+}
+
+/* SAVE */
+window.save = async function(){
+
+for(let r of data){
+
+if(r.id){
+await setDoc(doc(db,"rules",r.id),r);
+}else{
+await addDoc(collection(db,"rules"),r);
+}
+
+}
+
+alert("Gespeichert!");
+load();
+}
+
+load();
+
+</script>
+
+</body>
+</html>
