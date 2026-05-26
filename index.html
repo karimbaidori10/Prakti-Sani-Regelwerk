@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LSMD • Prakti/Sani Regelwerk</title>
+
+<style>
+body{
+margin:0;
+font-family:Arial;
+background:#0b1220;
+color:white;
+display:flex;
+}
+
+/* SIDEBAR */
+.sidebar{
+width:230px;
+height:100vh;
+position:fixed;
+left:0;
+top:0;
+background:#111827;
+border-right:1px solid #1f2937;
+padding:15px;
+overflow:auto;
+}
+
+.sidebar h3{
+font-size:14px;
+margin-bottom:10px;
+}
+
+.sidebar a{
+display:block;
+color:#cbd5e1;
+text-decoration:none;
+font-size:13px;
+margin:6px 0;
+cursor:pointer;
+}
+
+.sidebar a:hover{
+color:#38bdf8;
+}
+
+/* MAIN */
+.main{
+margin-left:250px;
+padding:20px;
+width:100%;
+}
+
+/* SECTION */
+.section{
+background:#111827;
+border-radius:12px;
+margin-bottom:18px;
+border:1px solid #1f2937;
+overflow:hidden;
+
+/* animation */
+opacity:0;
+transform:translateY(20px);
+transition:all 0.6s ease;
+}
+
+.section.show{
+opacity:1;
+transform:translateY(0);
+}
+
+.title{
+padding:14px;
+background:#1f2937;
+font-weight:700;
+cursor:pointer;
+}
+
+/* BOXES */
+.box{
+background:#0b1220;
+padding:14px;
+margin:12px;
+border-radius:10px;
+border-left:4px solid #38bdf8;
+line-height:1.7;
+}
+
+.warn{
+background:#1f0f10;
+padding:14px;
+margin:12px;
+border-radius:10px;
+border-left:4px solid #ef4444;
+line-height:1.7;
+}
+
+.good{
+background:#0f1f14;
+padding:14px;
+margin:12px;
+border-radius:10px;
+border-left:4px solid #22c55e;
+line-height:1.7;
+}
+
+/* COLLAPSE */
+.hidden{
+display:none;
+}
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+<h3>📌 Navigation</h3>
+<a onclick="go('s1')">§1–§7 Allgemein</a>
+<a onclick="go('s9')">§9–§13 Prüfungen</a>
+<a onclick="go('s15')">§15 Dokumente</a>
+<a onclick="go('s16')">§16 Motivation</a>
+<a onclick="go('s17')">§17 Disziplin</a>
+<a onclick="go('sdk')">Dienstkleidung</a>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+<!-- INTRO -->
+<div class="section show">
+<div class="title">📘 LSMD Regelwerk</div>
+<div class="box">
+Ausbilder-Regelwerk • Internal System • MEDICAL SYSTEM • ONLINE
+</div>
+</div>
+
+<!-- ALLGEMEIN -->
+<div class="section" id="s1">
+<div class="title" onclick="toggle(this)">🛡 Allgemeine Regeln §1–§7</div>
+
+<div class="content">
+
+<div class="box">
+§1 – Vorbildfunktion<br>
+Alle Ausbilder repräsentieren das LSMD und tragen eine Vorbildfunktion. Ein respektvoller, professioneller Umgang ist zwingend erforderlich.
+</div>
+
+<div class="warn">
+➡ Bei negativem Verhalten oder Respektlosigkeit erfolgt der sofortige Ausschluss aus der Abteilung.
+</div>
+
+<div class="box">
+§2 – Fachliche Kompetenz<br>
+Ausbilder handeln stets nach bestem Wissen und Gewissen. Sie sind verpflichtet, sämtliche Dienstvorschriften und relevanten Dokumente zu kennen.
+</div>
+
+<div class="box">
+§3 – Teamarbeit<br>
+Teamwork ist essenziell. Ausbilder arbeiten nicht als Einzelkämpfer, sondern unterstützen sich gegenseitig.
+</div>
+
+<div class="box">
+§4 – Mindestaktivität (Punkte)<br>
+Jeder Ausbilder muss wöchentlich mindestens 5 Punkte sammeln.
+</div>
+
+<div class="good">
+👉 Sobald die Punkte erreicht sind, habt ihr eine Grüne Woche.
+</div>
+
+<div class="box">
+§5 – Dienstkleidung<br>
+Die Kleiderordnung ist verpflichtend.
+</div>
+
+<div class="box">
+§6 – Wöchentliche Besprechung<br>
+Freitag 19:00–22:00 Uhr Pflichtbesprechung im Discord.
+</div>
+
+<div class="box">
+§7 – Werbung<br>
+Täglich mindestens 5 Jobannounces.
+</div>
+
+</div>
+</div>
+
+<!-- PRÜFUNGEN -->
+<div class="section" id="s9">
+<div class="title" onclick="toggle(this)">📋 Prüfungen & Einstellungen §9–§13</div>
+
+<div class="box">
+§9 – Durchführung<br>
+Prüfungen im Prakti/Sani Bereich + Discord Talks.
+</div>
+
+<div class="box">
+§9a – Vorerfahrung abfragen<br>
+Wie lange Spieler aktiv ist.
+</div>
+
+<div class="box">
+§10 – Ausbilderverteilung<br>
+Max 2–4 Ausbilder je nach Anzahl.
+</div>
+
+<div class="box">
+§11 – Zeitangaben<br>
+Dauer vorher ankündigen.
+</div>
+
+<div class="box">
+§12 – Blaues Blatt<br>
+Nicht nur vorlesen, verstehen lassen.
+</div>
+
+<div class="box">
+§13 – Fahrprüfung<br>
+Kann spontan stattfinden.
+</div>
+
+</div>
+
+<!-- DOKU -->
+<div class="section" id="s15">
+<div class="title" onclick="toggle(this)">🗂 Dokumentation §15</div>
+
+<div class="box">
+§15 – Dokumente dürfen nicht weitergegeben werden.
+</div>
+</div>
+
+<!-- MOTIVATION -->
+<div class="section" id="s16">
+<div class="title" onclick="toggle(this)">💬 Motivation §16</div>
+
+<div class="box">
+Neue Praktikanten fördern und motivieren.
+</div>
+</div>
+
+<!-- DISZIPLIN -->
+<div class="section" id="s17">
+<div class="title" onclick="toggle(this)">⚠️ Disziplin §17</div>
+
+<div class="box">
+Keine Streitigkeiten um Punkte.
+Kein „Kein-Bock“-Verhalten.
+</div>
+</div>
+
+<!-- DIENSTKLEIDUNG -->
+<div class="section" id="sdk">
+<div class="title" onclick="toggle(this)">👕 Dienstkleidung</div>
+
+<div class="box">
+Pflicht im Dienst.
+</div>
+
+<img src="assets/dienstkleidung.png" style="width:100%;border-radius:10px;margin:12px;">
+
+<div class="box">
+Made by Karim Tranquile
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+/* NAV SCROLL */
+function go(id){
+document.getElementById(id).scrollIntoView({behavior:"smooth"});
+}
+
+/* COLLAPSE */
+function toggle(el){
+let next = el.parentElement.querySelector(".content");
+if(next){
+next.classList.toggle("hidden");
+}
+}
+
+/* ANIMATION */
+const sections=document.querySelectorAll(".section");
+
+const obs=new IntersectionObserver(e=>{
+e.forEach(x=>{
+if(x.isIntersecting){
+x.target.classList.add("show");
+}
+});
+},{threshold:0.1});
+
+sections.forEach(s=>obs.observe(s));
+
+</script>
+
+</body>
+</html>
