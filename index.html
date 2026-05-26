@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LSMD • Prakti/Sani Regelwerk</title>
+
+<style>
+body{
+margin:0;
+font-family:Arial, sans-serif;
+background:#0b1220;
+color:white;
+}
+
+header{
+padding:25px;
+text-align:center;
+background:#111827;
+border-bottom:1px solid #1f2937;
+}
+
+header img{
+width:80px;
+margin-bottom:10px;
+}
+
+.container{
+max-width:1000px;
+margin:auto;
+padding:20px;
+}
+
+.section{
+background:#111827;
+border-radius:10px;
+margin-bottom:18px;
+overflow:hidden;
+box-shadow:0 0 10px rgba(0,0,0,0.3);
+}
+
+.title{
+padding:14px;
+background:#1f2937;
+cursor:pointer;
+font-weight:bold;
+font-size:15px;
+}
+
+.content{
+display:none;
+padding:15px;
+font-size:14px;
+line-height:1.7;
+color:#e5e7eb;
+}
+
+.rule{
+background:#0b1220;
+padding:10px;
+margin:8px 0;
+border-left:3px solid #38bdf8;
+border-radius:6px;
+cursor:pointer;
+transition:0.2s;
+}
+
+.rule.done{
+text-decoration:line-through;
+opacity:0.5;
+}
+
+.small{
+font-size:12px;
+opacity:0.8;
+}
+
+img{
+max-width:100%;
+border-radius:10px;
+margin-top:10px;
+}
+
+footer{
+text-align:center;
+padding:20px;
+opacity:0.6;
+font-size:12px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<img src="md-logo.png">
+<h2>LSMD • Prakti/Sani</h2>
+<p>Ausbilder-Regelwerk • Internal System • Medical Department Online</p>
+</header>
+
+<div class="container">
+
+<div id="app"></div>
+
+</div>
+
+<footer>
+Made by Bonez Tranquile x Kapkan Aveli • Expanded Version • Made by Karim Tranquile
+</footer>
+
+<script>
+
+const sections = [
+
+{
+title:"📘 Einführung – Prakti/Sani Regelwerk",
+content:`
+Dieses Regelwerk dient der Sicherstellung von Struktur, Qualität und Professionalität innerhalb der gesamten Prakti/Sani-Ausbildungsabteilung im LSMD.
+
+Alle Ausbilder verpflichten sich zur Einhaltung der folgenden Richtlinien. Änderungen werden zentral dokumentiert und durch die Leitung bestätigt.
+
+<br><br>
+<b>Status:</b> Active Internal Medical Framework<br>
+<b>Version:</b> 3.2 LSMD Core System<br>
+<b>System:</b> Training / Recruitment / Evaluation
+`
+},
+
+{
+title:"🛡 Allgemeine Regeln (Grundlagen)",
+content:`
+<div class="rule">§1 – Vorbildfunktion: Jeder Ausbilder repräsentiert LSMD und handelt professionell.</div>
+<div class="rule">§2 – Fachliche Kompetenz: Dienstvorschriften müssen vollständig bekannt sein.</div>
+<div class="rule">§3 – Teamarbeit: Zusammenarbeit hat Priorität vor Einzelentscheidungen.</div>
+<div class="rule">§4 – Aktivitätspflicht: Mindestens 5 Punkte pro Woche erforderlich.</div>
+<div class="rule">§5 – Dienstkleidung: Vollständige Uniformpflicht während Dienstzeiten.</div>
+<div class="rule">§6 – Wöchentliche Besprechung: Freitag 19–22 Uhr verpflichtend.</div>
+<div class="rule">§7 – Werbung: Mindestens 5 Jobannouncements täglich.</div>
+
+<div class="small">Alle Verstöße werden dokumentiert und können zu Sanktionen führen.</div>
+`
+},
+
+{
+title:"🔄 Kommunikation & Organisation",
+content:`
+<div class="rule">§8 – Absprachepflicht: Jede Aufgabe muss vorher abgestimmt werden.</div>
+
+Kommunikation erfolgt ausschließlich über offizielle Discord-Kanäle.
+
+Wichtige Regeln:
+- Keine eigenständigen Entscheidungen ohne Rücksprache
+- Kein Alleingang bei Prüfungen
+- Klare Zuweisung von Aufgaben erforderlich
+`
+},
+
+{
+title:"📋 Prüfungen & Einstellungen (Core System)",
+content:`
+<div class="rule">§9 – Durchführung: Alle Prüfungen im Staff/Discord Bereich.</div>
+<div class="rule">§9a – Aktivitätscheck: Erfahrung des Bewerbers muss abgefragt werden.</div>
+<div class="rule">§10 – Ausbilderlimit: Max. 2 Ausbilder pro Prüfung.</div>
+<div class="rule">§11 – Zeitmanagement: Dauer muss vorher kommuniziert werden.</div>
+<div class="rule">§12 – Blaues Blatt: Inhalte müssen verstanden und erklärt werden.</div>
+<div class="rule">§13 – Fahrprüfung: Praktikant darf alleine fahren können.</div>
+
+Zusätzliche Hinweise:
+- Prüfungen müssen fair und neutral durchgeführt werden
+- Kein Favorisieren von Personen
+- Dokumentation ist Pflicht
+`
+},
+
+{
+title:"🗂 Dokumentation & Verwaltung",
+content:`
+<div class="rule">§15 – Dokumentenschutz: Interne Daten dürfen nicht weitergegeben werden.</div>
+
+Alle Daten müssen:
+- sauber dokumentiert
+- regelmäßig aktualisiert
+- sicher gespeichert werden
+
+Bei Unsicherheiten ist die Leitung zu informieren.
+`
+},
+
+{
+title:"💬 Motivation & Entwicklung",
+content:`
+<div class="rule">§16 – Motivation: Neue Mitglieder aktiv fördern.</div>
+<div class="rule">§17 – Rekrutierung: Geeignete Kandidaten ansprechen.</div>
+
+Ziel:
+- langfristige Mitarbeiterbindung
+- aktive Entwicklung neuer Ausbilder
+`
+},
+
+{
+title:"🧭 Struktur & Paten-System",
+content:`
+<div class="rule">§18 – Patenzuweisung: Jeder neue Praktikant bekommt einen Ausbilder.</div>
+<div class="rule">§19 – Disziplin: Keine Streitigkeiten über Punkte oder Bewertungen.</div>
+
+System:
+- klare Hierarchie
+- feste Ansprechpartner
+- strukturierte Ausbildung
+`
+},
+
+{
+title:"⚠️ Warnsystem (Disziplin Framework)",
+content:`
+<div class="rule">§20 – Warnsystem: Dient zur Kontrolle und Disziplin.</div>
+
+Regeln:
+- 3 Warns = automatischer Ausschluss
+- schwere Verstöße = sofortiger Rauswurf
+- Manipulation = permanente Sperre
+
+Das System dient der Stabilität der gesamten Abteilung.
+`
+},
+
+{
+title:"👕 Dienstkleidung & Identität",
+content:`
+<img src="dienstkleidung.png">
+
+Die Dienstkleidung ist verpflichtend und Teil der Identität des Medical Departments.
+
+Regeln:
+- nur offizielle Kleidung erlaubt
+- keine Abweichungen im Dienst
+- sauberes Erscheinungsbild Pflicht
+
+<br><br>
+Made by Bonez Tranquile x Kapkan Aveli<br>
+Expanded System Version<br>
+Made by Karim Tranquile
+`
+}
+
+];
+
+function render(){
+
+let html="";
+
+sections.forEach((s,i)=>{
+
+html += `
+<div class="section">
+<div class="title" onclick="toggle(${i})">${s.title}</div>
+<div class="content" id="c${i}">
+${s.content}
+</div>
+</div>
+`;
+
+});
+
+document.getElementById("app").innerHTML = html;
+}
+
+function toggle(i){
+let el=document.getElementById("c"+i);
+el.style.display = el.style.display==="block"?"none":"block";
+}
+
+render();
+
+</script>
+
+</body>
+</html>
